@@ -1,5 +1,12 @@
-# Firebase Studio
+# Reel Dreams
 
-This is a NextJS starter in Firebase Studio.
+A sleek movie wishlist app for tracking films you want to watch, built with Next.js.
 
-To get started, take a look at src/app/page.tsx.
+## Features
+
+- Add movies to your wishlist.
+- Mark movies as watched.
+- Get AI-powered movie recommendations based on your taste.
+- A beautiful, cinematic dark theme.
+
+To get started, run the app and start building your watchlist!

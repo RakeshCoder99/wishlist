@@ -43,25 +43,25 @@ body {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 266 27% 12%; /* #1E1726 */
+    --foreground: 210 40% 98%;
+    --card: 266 27% 15%;
+    --card-foreground: 210 40% 98%;
+    --popover: 266 27% 12%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 47 91% 44%; /* #D4AC0D Gold */
+    --primary-foreground: 266 27% 12%; /* Dark text on gold */
+    --secondary: 279 44% 25%; /* #4A235A Deep Purple */
+    --secondary-foreground: 47 91% 80%; /* Light gold text on purple */
+    --muted: 279 44% 20%;
+    --muted-foreground: 210 40% 60%;
+    --accent: 279 44% 25%; /* #4A235A Deep Purple for hovers */
+    --accent-foreground: 47 91% 80%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --border: 279 44% 20%;
+    --input: 279 44% 20%;
+    --ring: 47 91% 44%; /* Gold for focus rings */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
