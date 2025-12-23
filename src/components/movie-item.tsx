@@ -19,15 +19,22 @@ export function MovieItem({ movie, onToggleWatched, onDeleteMovie }: MovieItemPr
         onCheckedChange={() => onToggleWatched(movie.id)}
         aria-label={`Mark ${movie.title} as watched`}
       />
-      <label
-        htmlFor={`watched-${movie.id}`}
-        className={cn(
-          "flex-grow cursor-pointer transition-colors",
-          movie.watched && "line-through text-muted-foreground"
+      <div className="flex-grow">
+        <label
+          htmlFor={`watched-${movie.id}`}
+          className={cn(
+            "cursor-pointer transition-colors",
+            movie.watched && "line-through text-muted-foreground"
+          )}
+        >
+          {movie.title}
+        </label>
+        {movie.watched && movie.watchedAt && (
+          <p className="text-xs text-muted-foreground">
+            Watched on {new Date(movie.watchedAt).toLocaleDateString()}
+          </p>
         )}
-      >
-        {movie.title}
-      </label>
+      </div>
       <Button
         variant="ghost"
         size="icon"
