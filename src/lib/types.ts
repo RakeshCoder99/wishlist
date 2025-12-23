@@ -3,4 +3,5 @@ export interface Movie {
   title: string;
   watched: boolean;
   createdAt: number;
+  watchedAt: number | null;
 }

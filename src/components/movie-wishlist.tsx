@@ -43,6 +43,7 @@ export default function MovieWishlist() {
       title,
       watched: false,
       createdAt: now,
+      watchedAt: null,
     };
     setMovies((prevMovies) => [newMovie, ...prevMovies]);
   };
@@ -50,7 +51,11 @@ export default function MovieWishlist() {
   const handleToggleWatched = (id: number) => {
     setMovies(
       movies.map((movie) =>
-        movie.id === id ? { ...movie, watched: !movie.watched } : movie
+        movie.id === id ? { 
+          ...movie, 
+          watched: !movie.watched,
+          watchedAt: !movie.watched ? Date.now() : null,
+        } : movie
       )
     );
   };
