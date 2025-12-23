@@ -37,10 +37,12 @@ export default function MovieWishlist() {
     if (movies.some(movie => movie.title.toLowerCase() === title.toLowerCase())) {
         return;
     }
+    const now = Date.now();
     const newMovie: Movie = {
-      id: Date.now(),
+      id: now,
       title,
       watched: false,
+      createdAt: now,
     };
     setMovies((prevMovies) => [newMovie, ...prevMovies]);
   };
