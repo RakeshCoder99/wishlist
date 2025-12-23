@@ -8,10 +8,11 @@ interface MovieListProps {
   onToggleWatched: (id: number) => void;
   onDeleteMovie: (id: number) => void;
   onSetRating?: (id: number, rating: number) => void;
+  onSetNotes?: (id: number, notes: string) => void;
   emptyMessage: string;
 }
 
-export function MovieList({ title, movies, onToggleWatched, onDeleteMovie, onSetRating, emptyMessage }: MovieListProps) {
+export function MovieList({ title, movies, onToggleWatched, onDeleteMovie, onSetRating, onSetNotes, emptyMessage }: MovieListProps) {
   return (
     <Card>
       <CardHeader>
@@ -27,6 +28,7 @@ export function MovieList({ title, movies, onToggleWatched, onDeleteMovie, onSet
                 onToggleWatched={onToggleWatched}
                 onDeleteMovie={onDeleteMovie}
                 onSetRating={onSetRating}
+                onSetNotes={onSetNotes}
               />
             ))}
           </div>

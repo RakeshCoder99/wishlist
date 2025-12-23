@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Textarea } from "@/components/ui/textarea";
 
 interface MovieItemProps {
   movie: Movie;
   onToggleWatched: (id: number) => void;
   onDeleteMovie: (id: number) => void;
   onSetRating?: (id: number, rating: number) => void;
+  onSetNotes?: (id: number, notes: string) => void;
 }
 
 const StarRating = ({ rating, onSetRating }: { rating: number | null, onSetRating: (rating: number) => void }) => {
@@ -32,7 +34,7 @@ const StarRating = ({ rating, onSetRating }: { rating: number | null, onSetRatin
 };
 
 
-export function MovieItem({ movie, onToggleWatched, onDeleteMovie, onSetRating }: MovieItemProps) {
+export function MovieItem({ movie, onToggleWatched, onDeleteMovie, onSetRating, onSetNotes }: MovieItemProps) {
   return (
     <div className="flex items-center gap-4 p-2 rounded-md transition-colors hover:bg-white/5">
       <Switch
@@ -41,24 +43,37 @@ export function MovieItem({ movie, onToggleWatched, onDeleteMovie, onSetRating }
         onCheckedChange={() => onToggleWatched(movie.id)}
         aria-label={`Mark ${movie.title} as watched`}
       />
-      <div className="flex-grow">
-        <label
-          htmlFor={`watched-${movie.id}`}
-          className={cn(
-            "cursor-pointer transition-colors",
-            movie.watched && "line-through text-muted-foreground"
+      <div className="flex-grow space-y-2">
+        <div>
+          <label
+            htmlFor={`watched-${movie.id}`}
+            className={cn(
+              "cursor-pointer transition-colors",
+              movie.watched && "line-through text-muted-foreground"
+            )}
+          >
+            {movie.title}
+          </label>
+          {movie.watched && movie.watchedAt && (
+            <p className="text-xs text-muted-foreground">
+              Watched on {new Date(movie.watchedAt).toLocaleDateString()}
+            </p>
           )}
-        >
-          {movie.title}
-        </label>
-        {movie.watched && movie.watchedAt && (
-          <p className="text-xs text-muted-foreground">
-            Watched on {new Date(movie.watchedAt).toLocaleDateString()}
-          </p>
-        )}
-        {movie.watched && onSetRating && (
-          <div className="mt-1">
-            <StarRating rating={movie.rating ?? 0} onSetRating={(rating) => onSetRating(movie.id, rating)} />
+        </div>
+        {movie.watched && (
+          <div className="space-y-2">
+            {onSetRating && (
+              <StarRating rating={movie.rating ?? 0} onSetRating={(rating) => onSetRating(movie.id, rating)} />
+            )}
+            {onSetNotes && (
+              <Textarea
+                placeholder="Add a note..."
+                defaultValue={movie.notes ?? ""}
+                onBlur={(e) => onSetNotes(movie.id, e.target.value)}
+                className="text-sm"
+                rows={2}
+              />
+            )}
           </div>
         )}
       </div>

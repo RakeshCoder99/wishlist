@@ -5,4 +5,5 @@ export interface Movie {
   createdAt: number;
   watchedAt: number | null;
   rating: number | null;
+  notes: string | null;
 }

@@ -45,6 +45,7 @@ export default function MovieWishlist() {
       createdAt: now,
       watchedAt: null,
       rating: null,
+      notes: null,
     };
     setMovies((prevMovies) => [newMovie, ...prevMovies]);
   };
@@ -70,6 +71,14 @@ export default function MovieWishlist() {
     setMovies(
       movies.map((movie) =>
         movie.id === id ? { ...movie, rating } : movie
+      )
+    );
+  };
+  
+  const handleSetNotes = (id: number, notes: string) => {
+    setMovies(
+      movies.map((movie) =>
+        movie.id === id ? { ...movie, notes } : movie
       )
     );
   };
@@ -123,6 +132,7 @@ export default function MovieWishlist() {
           onToggleWatched={handleToggleWatched}
           onDeleteMovie={handleDeleteMovie}
           onSetRating={handleSetRating}
+          onSetNotes={handleSetNotes}
           emptyMessage="You haven't watched any movies from your list yet."
         />
       </div>
