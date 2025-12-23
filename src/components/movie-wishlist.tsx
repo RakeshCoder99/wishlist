@@ -5,7 +5,6 @@ import type { Movie } from "@/lib/types";
 import { Clapperboard } from "lucide-react";
 import { AddMovieForm } from "@/components/add-movie-form";
 import { MovieList } from "@/components/movie-list";
-import { Recommendations } from "@/components/recommendations";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const LOCAL_STORAGE_KEY = "reel-dreams-movies";
@@ -136,8 +135,6 @@ export default function MovieWishlist() {
           emptyMessage="You haven't watched any movies from your list yet."
         />
       </div>
-
-      <Recommendations watchedMovies={watchedMovies} onAddMovie={handleAddMovie} />
     </div>
   );
 }
