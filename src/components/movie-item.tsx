@@ -1,3 +1,4 @@
+import { Star } from "lucide-react";
 import type { Movie } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -8,9 +9,30 @@ interface MovieItemProps {
   movie: Movie;
   onToggleWatched: (id: number) => void;
   onDeleteMovie: (id: number) => void;
+  onSetRating?: (id: number, rating: number) => void;
 }
 
-export function MovieItem({ movie, onToggleWatched, onDeleteMovie }: MovieItemProps) {
+const StarRating = ({ rating, onSetRating }: { rating: number | null, onSetRating: (rating: number) => void }) => {
+  return (
+    <div className="flex items-center">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <button key={star} onClick={() => onSetRating(star)} aria-label={`Rate ${star} stars`}>
+          <Star
+            className={cn(
+              "h-5 w-5",
+              rating && rating >= star
+                ? "text-primary fill-primary"
+                : "text-muted-foreground"
+            )}
+          />
+        </button>
+      ))}
+    </div>
+  );
+};
+
+
+export function MovieItem({ movie, onToggleWatched, onDeleteMovie, onSetRating }: MovieItemProps) {
   return (
     <div className="flex items-center gap-4 p-2 rounded-md transition-colors hover:bg-white/5">
       <Switch
@@ -33,6 +55,11 @@ export function MovieItem({ movie, onToggleWatched, onDeleteMovie }: MovieItemPr
           <p className="text-xs text-muted-foreground">
             Watched on {new Date(movie.watchedAt).toLocaleDateString()}
           </p>
+        )}
+        {movie.watched && onSetRating && (
+          <div className="mt-1">
+            <StarRating rating={movie.rating ?? 0} onSetRating={(rating) => onSetRating(movie.id, rating)} />
+          </div>
         )}
       </div>
       <Button
