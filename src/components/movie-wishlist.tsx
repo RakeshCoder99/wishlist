@@ -2,16 +2,18 @@
 
 import { useState, useEffect } from "react";
 import type { Movie } from "@/lib/types";
-import { Clapperboard } from "lucide-react";
+import { Clapperboard, Search } from "lucide-react";
 import { AddMovieForm } from "@/components/add-movie-form";
 import { MovieList } from "@/components/movie-list";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Input } from "@/components/ui/input";
 
 const LOCAL_STORAGE_KEY = "reel-dreams-movies";
 
 export default function MovieWishlist() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     try {
@@ -82,8 +84,11 @@ export default function MovieWishlist() {
     );
   };
 
-  const toWatchMovies = movies.filter((movie) => !movie.watched);
-  const watchedMovies = movies.filter((movie) => movie.watched);
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  const toWatchMovies = filteredMovies.filter((movie) => !movie.watched);
+  const watchedMovies = filteredMovies.filter((movie) => movie.watched);
 
   if (!isLoaded) {
     return (
@@ -117,13 +122,24 @@ export default function MovieWishlist() {
 
       <AddMovieForm onAddMovie={handleAddMovie} />
 
+      <div className="relative">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <Input
+          type="search"
+          placeholder="Search your movies..."
+          className="pl-10"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
       <div className="grid md:grid-cols-2 gap-8">
         <MovieList
           title="To Watch"
           movies={toWatchMovies}
           onToggleWatched={handleToggleWatched}
           onDeleteMovie={handleDeleteMovie}
-          emptyMessage="Your watchlist is empty. Add some movies!"
+          emptyMessage={searchTerm ? "No movies found." : "Your watchlist is empty. Add some movies!"}
         />
         <MovieList
           title="Watched"
@@ -132,7 +148,7 @@ export default function MovieWishlist() {
           onDeleteMovie={handleDeleteMovie}
           onSetRating={handleSetRating}
           onSetNotes={handleSetNotes}
-          emptyMessage="You haven't watched any movies from your list yet."
+          emptyMessage={searchTerm ? "No movies found." : "You haven't watched any movies from your list yet."}
         />
       </div>
     </div>
