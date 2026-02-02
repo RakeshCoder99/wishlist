@@ -86,7 +86,9 @@ export default function MovieWishlist() {
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const toWatchMovies = filteredMovies.filter((movie) => !movie.watched);
+  const toWatchMovies = filteredMovies
+    .filter((movie) => !movie.watched)
+    .sort((a, b) => a.title.localeCompare(b.title));
   const watchedMovies = filteredMovies.filter((movie) => movie.watched);
 
   if (!isLoaded) {
