@@ -58,7 +58,6 @@ export default function MovieWishlist() {
           ...movie, 
           watched: !movie.watched,
           watchedAt: !movie.watched ? Date.now() : null,
-          rating: !movie.watched ? movie.rating : null, // Reset rating if moved to "To Watch"
         } : movie
       )
     );
