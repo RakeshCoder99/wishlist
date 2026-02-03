@@ -83,6 +83,14 @@ export default function MovieWishlist() {
     );
   };
 
+  const handleEditMovie = (id: number, title: string) => {
+    setMovies(
+      movies.map((movie) =>
+        movie.id === id ? { ...movie, title } : movie
+      )
+    );
+  };
+
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -140,6 +148,7 @@ export default function MovieWishlist() {
           movies={toWatchMovies}
           onToggleWatched={handleToggleWatched}
           onDeleteMovie={handleDeleteMovie}
+          onEditMovie={handleEditMovie}
           emptyMessage={searchTerm ? "No movies found." : "Your watchlist is empty. Add some movies!"}
         />
         <MovieList
@@ -147,6 +156,7 @@ export default function MovieWishlist() {
           movies={watchedMovies}
           onToggleWatched={handleToggleWatched}
           onDeleteMovie={handleDeleteMovie}
+          onEditMovie={handleEditMovie}
           onSetRating={handleSetRating}
           onSetNotes={handleSetNotes}
           emptyMessage={searchTerm ? "No movies found." : "You haven't watched any movies from your list yet."}
