@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import * as XLSX from "xlsx";
 import type { Movie } from "@/lib/types";
 import { Clapperboard, Search, Download, Upload } from "lucide-react";
 import { AddMovieForm } from "@/components/add-movie-form";
@@ -107,7 +106,8 @@ export default function MovieWishlist() {
     );
   };
 
-  const handleDownloadExcel = () => {
+  const handleDownloadExcel = async () => {
+    const XLSX = await import("xlsx");
     const moviesToExport = movies.map((movie) => ({
       Title: movie.title,
       Watched: movie.watched,
